@@ -1,5 +1,6 @@
 package com.tech_it_easy.controller.dtos;
 
+import com.tech_it_easy.controller.models.RemoteController;
 import com.tech_it_easy.controller.models.ScreenQuality;
 import com.tech_it_easy.controller.models.ScreenType;
 import jakarta.persistence.EnumType;
@@ -23,6 +24,7 @@ public class TelevisionResponseDto {
     public Boolean hasAmbiLight;
     public int originalStock;
     public int sold;
+    public RemoteController remoteController;
 
     public LocalDate soldDate;
     public LocalDate stockDate;

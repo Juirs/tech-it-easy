@@ -1,5 +1,6 @@
 package com.tech_it_easy.controller.dtos;
 
+import com.tech_it_easy.controller.models.RemoteController;
 import com.tech_it_easy.controller.models.ScreenQuality;
 import com.tech_it_easy.controller.models.ScreenType;
 import jakarta.persistence.EnumType;
@@ -32,6 +33,7 @@ public class TelevisionRequestDto {
     public Boolean hasAmbiLight;
     public int originalStock;
     public int sold;
+    public RemoteController remoteController;
 
     @Enumerated(EnumType.STRING)
     public ScreenType screenType;

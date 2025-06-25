@@ -7,7 +7,9 @@ import com.tech_it_easy.controller.exceptions.NameTooLongException;
 import com.tech_it_easy.controller.exceptions.NotNullException;
 import com.tech_it_easy.controller.exceptions.RecordNotFoundException;
 import com.tech_it_easy.controller.mappers.TelevisionMapper;
+import com.tech_it_easy.controller.models.RemoteController;
 import com.tech_it_easy.controller.models.Television;
+import com.tech_it_easy.controller.repositories.RemoteControllerRepository;
 import com.tech_it_easy.controller.repositories.TelevisionRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,12 @@ import java.util.List;
 @Service
 public class TelevisionService {
     private final TelevisionRepository televisionRepository;
+    private final RemoteControllerRepository remoteControllerRepository;
 
-    public TelevisionService(TelevisionRepository televisionRepository) {
+    public TelevisionService (TelevisionRepository televisionRepository,
+                              RemoteControllerRepository remoteControllerRepository) {
         this.televisionRepository = televisionRepository;
+        this.remoteControllerRepository = remoteControllerRepository;
     }
 
     public List<Television> getTelevisions(String brand) {
@@ -90,5 +95,24 @@ public class TelevisionService {
     public TelevisionResponseDto updateTelevisionAndMapToDto(Long id, TelevisionRequestDto televisionRequestDto) {
         Television television = this.updateTelevision(id, televisionRequestDto);
         return TelevisionMapper.toDto(television);
+    }
+
+    public TelevisionResponseDto updateTelevisionRemoteControllerAndMapToDto(Long id, Long remoteControllerId) {
+        Television television = this.getTelevisionById(id);
+        RemoteController remoteController = this.remoteControllerRepository.findById(remoteControllerId)
+                .orElseThrow(() -> new RecordNotFoundException("Remote Controller with ID " + remoteControllerId + " not found."));
+
+        television.setRemoteController(remoteController);
+        Television updatedTelevision = this.televisionRepository.save(television);
+        return TelevisionMapper.toDto(updatedTelevision);
+    }
+
+    public void assignRemoteControllerToTelevision(Long televisionId, Long remoteControllerId) {
+        Television television = this.getTelevisionById(televisionId);
+        RemoteController remoteController = this.remoteControllerRepository.findById(remoteControllerId)
+                .orElseThrow(() -> new RecordNotFoundException("Remote Controller with ID " + remoteControllerId + " not found."));
+
+        television.setRemoteController(remoteController);
+        this.televisionRepository.save(television);
     }
 }

@@ -1,5 +1,6 @@
 package com.tech_it_easy.controller.controllers;
 
+import com.tech_it_easy.controller.dtos.IdInputDto;
 import com.tech_it_easy.controller.dtos.TelevisionRequestDto;
 import com.tech_it_easy.controller.dtos.TelevisionResponseDto;
 import com.tech_it_easy.controller.dtos.TelevisionSalesDto;
@@ -45,6 +46,12 @@ public class TelevisionController {
     @PutMapping("/{id}")
     public ResponseEntity<TelevisionResponseDto> updateTelevision(@PathVariable Long id, @Valid @RequestBody TelevisionRequestDto televisionRequestDto) {
         TelevisionResponseDto televisionResponseDto = this.service.updateTelevisionAndMapToDto(id, televisionRequestDto);
+        return ResponseEntity.ok(televisionResponseDto);
+    }
+
+    @PutMapping("/{id}/remotecontroller")
+    public ResponseEntity<TelevisionResponseDto> updateTelevisionRemoteController(@PathVariable Long id, @RequestBody IdInputDto remoteControllerId) {
+        TelevisionResponseDto televisionResponseDto = this.service.updateTelevisionRemoteControllerAndMapToDto(id, remoteControllerId.id);
         return ResponseEntity.ok(televisionResponseDto);
     }
 

@@ -17,7 +17,7 @@ public class TelevisionMapper {
                               dto.price, dto.availableSize, dto.refreshRate,
                               dto.isSmartTv, dto.hasWiFi, dto.hasVoiceControl,
                               dto.hasHDR, dto.hasBluetooth, dto.hasAmbiLight,
-                              dto.originalStock, dto.sold, dto.screenType, dto.screenQuality);
+                              dto.originalStock, dto.sold, dto.screenType, dto.screenQuality, dto.remoteController);
     }
 
     public static TelevisionResponseDto toDto(Television tv) {
@@ -44,6 +44,9 @@ public class TelevisionMapper {
         dto.stockDate = tv.getStockDate();
         dto.screenType = tv.getScreenType();
         dto.screenQuality = tv.getScreenQuality();
+        if (tv.getRemoteController() != null) {
+            dto.remoteController = tv.getRemoteController();
+        }
         return dto;
     }
 

@@ -5,3 +5,4 @@ VALUES
 ('QLED', 'Sony', 'Bravia QLED', 899.99, 75.0, 120, true, true, true, true, true, false, 80, 30, '2025-06-12', '2025-05-20', 'LED', 'FOUR_K'),
 ('LCD', 'Panasonic', 'Viera LCD', 299.99, 40.0, 60, false, false, false, false, false, false, 200, 50, '2025-06-05', '2025-05-10', 'LCD', 'HD'),
 ('Plasma', 'Philips', 'Ambilight Plasma', 699.99, 50.0, 60, true, true, true, true, false, true, 60, 15, '2025-06-08', '2025-05-12', 'PLASMA', 'FULL_HD');
+

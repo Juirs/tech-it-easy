@@ -1,5 +1,6 @@
 package com.tech_it_easy.controller.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -25,6 +26,11 @@ public class Television {
     private int originalStock;
     private int sold;
 
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "remote_controller_id")
+    private RemoteController remoteController;
+
     private LocalDate soldDate;
     private LocalDate stockDate;
 
@@ -34,13 +40,12 @@ public class Television {
     @Enumerated(EnumType.STRING)
     private ScreenQuality screenQuality;
 
-    public Television() {
-    }
+    public Television() {}
 
     public Television(String type, String brand, String name, Double price, Double availableSize, int refreshRate,
                       Boolean isSmartTv, Boolean hasWiFi, Boolean hasVoiceControl, Boolean hasHDR,
                       Boolean hasBluetooth, Boolean hasAmbiLight, int originalStock, int sold,
-                      ScreenType screenType, ScreenQuality screenQuality) {
+                      ScreenType screenType, ScreenQuality screenQuality, RemoteController remoteController) {
         this.type = type;
         this.brand = brand;
         this.name = name;
@@ -59,6 +64,7 @@ public class Television {
         this.stockDate = stockDate;
         this.screenType = screenType;
         this.screenQuality = screenQuality;
+        this.remoteController = remoteController;
     }
 
     public Long getId() {
@@ -212,5 +218,12 @@ public class Television {
     public void setScreenQuality(ScreenQuality screenQuality) {
         this.screenQuality = screenQuality;
     }
-}
 
+    public RemoteController getRemoteController() {
+        return remoteController;
+    }
+
+    public void setRemoteController(RemoteController remoteController) {
+        this.remoteController = remoteController;
+    }
+}
