@@ -1,6 +1,9 @@
 package com.tech_it_easy.controller.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "ci_modules")
@@ -12,6 +15,10 @@ public class CiModule {
     private String name;
     private String type;
     private Double price;
+
+    @OneToMany(mappedBy = "ciModule")
+    @JsonIgnore
+    List<Television> televisions;
 
     public CiModule() {}
 
@@ -51,5 +58,13 @@ public class CiModule {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public List<Television> getTelevisions() {
+        return televisions;
+    }
+
+    public void setTelevisions(List<Television> televisions) {
+        this.televisions = televisions;
     }
 }

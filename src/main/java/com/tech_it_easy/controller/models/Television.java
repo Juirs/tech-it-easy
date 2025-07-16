@@ -3,6 +3,7 @@ package com.tech_it_easy.controller.models;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "televisions")
@@ -26,11 +27,6 @@ public class Television {
     private int originalStock;
     private int sold;
 
-    @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "remote_controller_id")
-    private RemoteController remoteController;
-
     private LocalDate soldDate;
     private LocalDate stockDate;
 
@@ -39,6 +35,23 @@ public class Television {
 
     @Enumerated(EnumType.STRING)
     private ScreenQuality screenQuality;
+
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "remote_controller_id")
+    private RemoteController remoteController;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ci_module_id")
+    private CiModule ciModule;
+
+    @ManyToMany
+    @JoinTable(
+            name = "television_wallbrackets",
+            joinColumns = @JoinColumn(name = "television"),
+            inverseJoinColumns = @JoinColumn(name = "wallbracket")
+    )
+    List<WallBracket> wallBrackets;
 
     public Television() {}
 
@@ -225,5 +238,21 @@ public class Television {
 
     public void setRemoteController(RemoteController remoteController) {
         this.remoteController = remoteController;
+    }
+
+    public CiModule getCiModule() {
+        return ciModule;
+    }
+
+    public void setCiModule(CiModule ciModule) {
+        this.ciModule = ciModule;
+    }
+
+    public List<WallBracket> getWallBrackets() {
+        return wallBrackets;
+    }
+
+    public void setWallBrackets(List<WallBracket> wallBrackets) {
+        this.wallBrackets = wallBrackets;
     }
 }
