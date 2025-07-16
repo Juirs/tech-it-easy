@@ -46,8 +46,8 @@ public class RemoteControllerController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteRemoteController(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRemoteController(@PathVariable Long id) {
         this.service.deleteRemoteController(id);
-        return ResponseEntity.ok("Remote Controller with ID " + id + " removed successfully.");
+        return ResponseEntity.noContent().build();
     }
 }
