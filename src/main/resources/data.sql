@@ -6,3 +6,5 @@ VALUES
 ('LCD', 'Panasonic', 'Viera LCD', 299.99, 40.0, 60, false, false, false, false, false, false, 200, 50, '2025-06-05', '2025-05-10', 'LCD', 'HD'),
 ('Plasma', 'Philips', 'Ambilight Plasma', 699.99, 50.0, 60, true, true, true, true, false, true, 60, 15, '2025-06-08', '2025-05-12', 'PLASMA', 'FULL_HD');
 
+INSERT INTO users (username, password, enabled, apikey, email) VALUES ('henk', '$2a$12$tJ1OH9MNbJVoMn53ZeDXQeN1vNK/tN0zO530T0dExTY1y6guOoNni', true, '7847493', 'test@testy.tst');
+INSERT INTO authorities (username, authority) VALUES ('henk', 'ROLE_ADMIN');

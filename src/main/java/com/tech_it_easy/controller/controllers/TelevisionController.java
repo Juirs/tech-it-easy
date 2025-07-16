@@ -56,9 +56,9 @@ public class TelevisionController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteTelevision(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteTelevision(@PathVariable Long id) {
         this.service.deleteTelevision(id);
-        return ResponseEntity.ok("Television with ID " + id + " removed successfully.");
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/sales")

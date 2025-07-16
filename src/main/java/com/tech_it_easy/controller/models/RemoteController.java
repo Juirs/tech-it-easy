@@ -18,7 +18,7 @@ public class RemoteController {
     private int originalStock;
 
     @JsonBackReference
-    @OneToOne(mappedBy = "remoteController", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "remoteController", cascade = CascadeType.ALL)
     private Television television;
 
     public RemoteController() {}

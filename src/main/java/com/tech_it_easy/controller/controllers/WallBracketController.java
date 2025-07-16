@@ -46,8 +46,8 @@ public class WallBracketController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteWallBracket(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteWallBracket(@PathVariable Long id) {
         this.service.deleteWallBracket(id);
-        return ResponseEntity.ok("WallBracket with ID " + id + " removed successfully.");
+        return ResponseEntity.noContent().build();
     }
 }
